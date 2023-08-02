@@ -11,6 +11,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/navbar' %>
+    <div class="container">
+      <%= Time.now %>
+      <%= yield %>
+    </div>
   </body>
 </html>

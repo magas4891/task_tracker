@@ -1,0 +1,17 @@
+<%= turbo_frame_tag dom_id(task) do %>
+  <p>
+    <strong>Title:</strong>
+    <%= task.title %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= task.description %>
+  </p>
+  <p>
+    <strong>Due date:</strong>
+    <%= task.due_date %>
+  </p>
+
+  <%= link_to 'Edit', edit_task_path(task) %>
+  <%= button_to 'Delete', task, method: :delete %>
+<% end %>
