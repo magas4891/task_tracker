@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :tasks
-  resources :categories, only: %i[create]
+  resources :categories
 end

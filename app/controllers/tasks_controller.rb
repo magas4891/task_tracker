@@ -6,7 +6,9 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks
   end
 
-  def edit; end
+  def edit
+    render :new
+  end
 
   def update
     respond_to do |format|
@@ -26,7 +28,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.turbo_stream
-        format.html { redirect_to task_url(@task), notice: 'Task was successfully updated.' }
+        format.html { redirect_to task_url(@task), notice: 'Task was successfully created.' }
       end
     end
   end

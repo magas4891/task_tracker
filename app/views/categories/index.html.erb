@@ -1,0 +1,9 @@
+<h1>Categories</h1>
+
+<div id="categories">
+  <%= render @categories %>
+</div>
+
+<%= turbo_frame_tag 'new_category' do %>
+  <%= render 'categories/new_category' %>
+<% end %>
