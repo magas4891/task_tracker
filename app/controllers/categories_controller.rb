@@ -1,9 +1,13 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_category, only: %w[edit update destroy]
+  before_action :set_category, only: %w[show edit update destroy]
 
   def index
     @categories = current_user.categories
+  end
+
+  def show
+    @tasks = @category.tasks
   end
 
   def new

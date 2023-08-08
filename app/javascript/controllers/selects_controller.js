@@ -24,7 +24,6 @@ export default class extends Controller {
             }
           }
         });
-        select.on('change', () => console.log('qqqqqqqqqq'))
       }
     });
     $(document).on('select2:select', '#task_category_id', function(e) {
