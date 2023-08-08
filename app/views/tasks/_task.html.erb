@@ -1,17 +1,11 @@
 <%= turbo_frame_tag dom_id(task) do %>
-  <p>
-    <strong>Title:</strong>
-    <%= task.title %>
-  </p>
-  <p>
-    <strong>Description:</strong>
-    <%= task.description %>
-  </p>
-  <p>
-    <strong>Due date:</strong>
-    <%= task.due_date %>
-  </p>
-
-  <%= link_to 'Edit', edit_task_path(task) %>
-  <%= button_to 'Delete', task, method: :delete %>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= task.title %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">Until - <%= task.due_date %></h6>
+      <p class="card-text"><%= task.description %></p>
+      <%= link_to 'Edit', edit_task_path(task) %>
+      <%= button_to 'Delete', task, method: :delete %>
+    </div>
+  </div>
 <% end %>

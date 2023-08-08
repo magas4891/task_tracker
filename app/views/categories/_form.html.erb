@@ -1,0 +1,8 @@
+<%= turbo_frame_tag @category do %>
+  <%= simple_form_for @category do |f| %>
+    <%= f.input :name, input_html: { class: 'form-control' } %>
+
+    <%= f.button :submit, class: 'btn btn-primary' %>
+    <%= link_to 'Back', categories_path %>
+  <% end %>
+<% end %>

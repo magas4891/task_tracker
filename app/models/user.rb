@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :tasks
+  has_many :categories
+  has_many :categorized_tasks, through: :categories, source: :tasks
 end

@@ -6,7 +6,9 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks
   end
 
-  def edit; end
+  def edit
+    render :new
+  end
 
   def update
     respond_to do |format|
@@ -26,7 +28,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.turbo_stream
-        format.html { redirect_to task_url(@task), notice: 'Task was successfully updated.' }
+        format.html { redirect_to task_url(@task), notice: 'Task was successfully created.' }
       end
     end
   end
@@ -47,6 +49,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :due_date)
+    params.require(:task).permit(:title, :description, :due_date, :category_id)
   end
 end
