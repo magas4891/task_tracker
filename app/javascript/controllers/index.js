@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import SelectsController from "./selects_controller"
 application.register("selects", SelectsController)
+
+import SortableController from "./sortable_controller"
+application.register("sortable", SortableController)
