@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 user_params = {
-  email: 'test@example.com',
+  email: 'test2@example.com',
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name,
   password: 'password'
@@ -15,7 +15,7 @@ user_params = {
 user = User.create(user_params)
 
 5.times do
-  cat = user.categories.create(name: Faker::Hobby.activity)
+  cat = user.dashboard.categories.create(name: Faker::Hobby.activity)
   10.times do
     cat.tasks.create(user: user,
                      title: Faker::Movie.title,
