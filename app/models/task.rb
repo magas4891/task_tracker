@@ -11,5 +11,8 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :category, optional: true
 
-  scope :category_tasks, -> (category_id) { where('category_id = ?', category_id) }
+  scope :categorized, -> { where.not(category_id: nil) }
+  scope :uncategorized, -> { where(category_id: nil) }
+
+  acts_as_list scope: [:category_id, :user_id]
 end

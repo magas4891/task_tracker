@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "tasks#index"
+  root "dashboards#show"
 
   devise_for :users
 

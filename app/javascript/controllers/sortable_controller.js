@@ -12,6 +12,7 @@ export default class extends Controller {
         handle: '.task-handle'
       });
     });
+
     this.categoriesTargets.forEach((e) => {
       var categorySortable = Sortable.create(e, {
         group: 'categories',

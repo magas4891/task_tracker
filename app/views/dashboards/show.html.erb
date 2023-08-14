@@ -1,0 +1,22 @@
+<h1>Dashboard</h1>
+
+<div class="d-flex gap-3" data-controller="sortable" data-sortable-target="categories">
+  <% @categories.each do |cat| %>
+    <div class="card category-card item" style="min-width: 350px;">
+      <h5 class="card-header">
+        <%= cat.name %>
+        <i class="bi bi-arrows-move category-handle float-end"></i>
+      </h5>
+      <div class="card-body">
+        <ul class="p-0" data-category-id="<%= cat.id %>" data-sortable-target="tasks">
+          <% cat.tasks.each do |t| %>
+            <li class="task-item list-unstyled" data-task-id="<%= t.id %>">
+              <i class="bi bi-arrows-move task-handle pr-3"></i>
+              <%= t.title %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>
