@@ -5,4 +5,10 @@ Rails.application.routes.draw do
 
   resources :tasks
   resources :categories
+  resources :dashboards, only: :show do
+    collection do
+      patch :categories_reorder
+      patch :tasks_reorder
+    end
+  end
 end

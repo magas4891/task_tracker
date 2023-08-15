@@ -5,18 +5,67 @@ export default class extends Controller {
   static targets = ["categories", "tasks"];
 
   connect() {
-    console.log("112345777");
+    const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+
     this.tasksTargets.forEach((e) => {
-      var taskSortable = Sortable.create(e, {
+      const taskSortable = Sortable.create(e, {
         group: 'tasks',
-        handle: '.task-handle'
+        handle: '.task-handle',
+        swapThreshold: 1,
+        animation: 150,
+        onEnd: function(evt) {
+          const { newIndex, oldIndex, from, to } = evt;
+
+          if ( from === to && newIndex === oldIndex ) { return false }
+
+          const data = {
+            new_position: newIndex + 1,
+            old_position: oldIndex + 1,
+            from: from.dataset.categoryId,
+            to: to.dataset.categoryId
+          }
+
+          fetch('/dashboards/tasks_reorder', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken,
+              Accept: "text/vnd.turbo-stream.html"
+            },
+            body: JSON.stringify(data)
+          })
+        }
       });
     });
 
     this.categoriesTargets.forEach((e) => {
-      var categorySortable = Sortable.create(e, {
+      const categorySortable = Sortable.create(e, {
         group: 'categories',
-        handle: '.category-handle'
+        handle: '.category-handle',
+        swapThreshold: 1,
+        animation: 150,
+        onEnd: function(evt) {
+          const { newIndex, oldIndex } = evt;
+
+          console.log({newIndex, oldIndex})
+
+          if ( newIndex === oldIndex ) { return false }
+
+          const data = {
+            new_position: newIndex,
+            old_position: oldIndex
+          }
+
+          fetch('/dashboards/categories_reorder', {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken,
+              Accept: "text/vnd.turbo-stream.html"
+            },
+            body: JSON.stringify(data)
+          })
+        }
       });
     });
   }

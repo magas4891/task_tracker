@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %w[show edit update destroy]
 
   def index
-    @categories = current_user.categories
+    @categories = current_user.dashboard.categories
   end
 
   def show
@@ -11,11 +11,11 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = current_user.categories.build
+    @category = current_user.dashboard.categories.build
   end
 
   def create
-    @category = current_user.categories.new(category_params)
+    @category = current_user.dashboard.categories.new(category_params)
 
     respond_to do |format|
       if @category.save
