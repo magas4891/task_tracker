@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %w[edit update destroy]
 
   def index
-    @categories = current_user.categories.populated_category_tasks
+    @categories = current_user.dashboard.categories.populated_category_tasks
     @tasks = current_user.tasks
   end
 

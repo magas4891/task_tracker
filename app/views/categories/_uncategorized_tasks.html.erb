@@ -1,12 +1,11 @@
-<%= turbo_frame_tag dom_id(category)  do %>
+<%= turbo_frame_tag 'uncategorized'  do %>
   <div class="card category-card item" style="min-width: 350px;">
     <h5 class="card-header">
-      <%= category.name %>
-      <i class="bi bi-arrows-move category-handle float-end"></i>
+      Uncategorized
     </h5>
     <div class="card-body">
-      <ul class="p-0" data-category-id="<%= category.id %>" data-sortable-target="tasks">
-        <% category.tasks.order(position: :asc).each do |t| %>
+      <ul class="p-0" data-category-id="nil" data-sortable-target="tasks">
+        <% @tasks.each do |t| %>
           <li class="task-item list-unstyled" data-task-id="<%= t.id %>">
             <i class="bi bi-arrows-move task-handle pr-3"></i>
             <%= t.title %>
