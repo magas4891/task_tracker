@@ -34,6 +34,8 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.update(category_params)
         format.turbo_stream
+      else
+        format.json { render json: @category.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
