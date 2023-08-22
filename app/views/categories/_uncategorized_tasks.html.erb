@@ -1,9 +1,9 @@
-<%= turbo_frame_tag 'uncategorized'  do %>
+<%= turbo_frame_tag 'uncategorized' do %>
   <div class="card category-card item" style="min-width: 350px;">
     <h5 class="card-header mh-55 d-flex align-items-center">
       Uncategorized
     </h5>
-    <div class="card-body">
+    <div class="card-body" data-controller="sortable" data-sortable-target="categories">
       <ul class="p-0" data-category-id="nil" data-sortable-target="tasks">
         <% @tasks.each do |t| %>
           <li class="task-item list-unstyled" data-task-id="<%= t.id %>">

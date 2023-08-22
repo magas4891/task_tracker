@@ -98,7 +98,10 @@ export default class extends Controller {
   showPopover(element, message) {
     const popover = new Popover(element, {
       title: 'Error',
-      content: message
+      content: message,
+      placement: 'top',
+      template: '<div class="popover bs-popover-top" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header bg-danger text-white"></h3><div class="popover-body bg-light"></div></div>',
+      animation: true
     });
     popover.show();
 

@@ -49,8 +49,8 @@ export default class extends Controller {
           if ( newIndex === oldIndex ) { return false }
 
           const data = {
-            new_position: newIndex,
-            old_position: oldIndex
+            new_position: newIndex + 1,
+            old_position: oldIndex + 1
           }
 
           fetch('/dashboards/categories_reorder', {
