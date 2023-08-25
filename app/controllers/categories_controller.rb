@@ -1,9 +1,15 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_category, only: %w[show edit update destroy]
+  before_action :find_prev_category, only: :create
 
   def index
     @categories = current_user.dashboard.categories
+
+    # render :index
+    # if turbo_frame_request?
+    #
+    # end
   end
 
   def show
@@ -11,19 +17,16 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = current_user.dashboard.categories.build
+    prev_position = Category.find(params[:prevCategoryId]).position
+    @category = current_user.dashboard.categories.new(position: prev_position + 1)
+
+    respond_to { | format | format.turbo_stream }
   end
 
   def create
     @category = current_user.dashboard.categories.new(category_params)
 
-    respond_to do |format|
-      if @category.save
-        format.turbo_stream
-        format.json { render json: { new_category: @category } }
-        format.html { redirect_to category_url(@category), notice: 'Category was successfully created.' }
-      end
-    end
+    respond_to { | format | format.turbo_stream if @category.save }
   end
 
   def edit
@@ -51,8 +54,12 @@ class CategoriesController < ApplicationController
 
   private
 
+  def find_prev_category
+    @prev_category = current_user.dashboard.categories.find_by(position: params[:category][:position].to_i - 1)
+  end
+
   def category_params
-    params.require(:category).permit(:name)
+    params.require(:category).permit(:name, :position)
   end
 
   def set_category

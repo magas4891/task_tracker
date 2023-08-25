@@ -1,13 +1,10 @@
-import { Controller } from "@hotwired/stimulus"
-import $ from 'jquery'
-// import Select2 from "select2"
-
-// require("select2/dist/css/select2")
+import { Controller } from '@hotwired/stimulus';
+import $ from 'jquery';
 
 // Connects to data-controller="selects"
 export default class extends Controller {
   connect() {
-    document.addEventListener("turbo:frame-load", () => {
+    document.addEventListener('turbo:frame-load', () => {
       const select = $('#task_category_id');
       if (select.length > 0) {
         select.select2({

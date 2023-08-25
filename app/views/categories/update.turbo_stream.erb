@@ -1,1 +1,1 @@
-<%= turbo_stream.update(@category, partial: 'categories/category', locals: { category: @category }) %>
+<%= turbo_stream.replace(@category, partial: 'categories/category', locals: { category: @category }) %>

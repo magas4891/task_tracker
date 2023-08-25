@@ -1,8 +1,8 @@
 <h1>Dashboard</h1>
 
-<div id="categories" class="d-flex gap-3">
+<div id='categories' class='d-flex gap-3'>
   <%= render 'categories/uncategorized_tasks' %>
-  <div class="d-flex gap-3" data-controller="sortable" data-sortable-target="categories">
+  <div id='namedCategories' class='d-flex gap-3' data-controller='sortable' data-sortable-target='categories'>
     <%= render 'categories/categories', categories: @categories %>
   </div>
 </div>
