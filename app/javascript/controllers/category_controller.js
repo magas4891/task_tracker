@@ -24,11 +24,21 @@ export default class extends Controller {
             for (const mutation of mutationsList) {
               const frameContent = mutation.target;
               if (frameContent && frameContent.id === 'new_category') {
+                this.scrollToLastCard();
+                this.disableAnotherMenu(true);
                 const closeButton = frameContent.querySelector('.remove-category');
+                const nameInput = frameContent.querySelector('input#category_name');
                 if (closeButton) {
-                  closeButton.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    newCategoryFrame.remove();
+                  nameInput.focus();
+                  closeButton.addEventListener('click', () => {
+                    this.removeFrame(frameContent);
+                  });
+                  nameInput.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') {
+                      this.removeFrame(frameContent);
+                    } else if (event.key === 'Enter') {
+                      this.disableAnotherMenu(false);
+                    }
                   });
                 }
               }
@@ -138,8 +148,10 @@ export default class extends Controller {
     sortables.option('disabled', false);
   }
 
-  removeFrame() {
-    console.log('1111111111111111111111')
+  removeFrame(frame) {
+    event.preventDefault();
+    frame.remove();
+    this.disableAnotherMenu(false);
   }
 
   showPopover(element, message) {
@@ -156,6 +168,19 @@ export default class extends Controller {
     setTimeout(() => {
       popover.hide();
     }, 3000);
+  }
+
+  scrollToLastCard() {
+    const container = $('#categories');
+    const lastCard = container.find('#new_category');
+    container.animate({
+      scrollLeft: lastCard.offset().left - container.offset().left + container.scrollLeft()
+    }, 300);
+  }
+
+  disableAnotherMenu(val) {
+    const menus = $('.category-menu');
+    menus.each(function() { this.disabled = val; });
   }
 
   get url() {
