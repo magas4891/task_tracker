@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: %w[edit update destroy]
+  before_action :set_category, only: :new
 
   def index
     @categories = current_user.dashboard.categories.populated_category_tasks
@@ -21,6 +22,8 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+
+    respond_to { | format | format.turbo_stream }
   end
 
   def create
@@ -44,6 +47,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def set_category
+    @category_id = params[:categoryId] && Category.find(params[:categoryId]).id
+  end
 
   def set_task
     @task = Task.find(params[:id])

@@ -12,3 +12,6 @@ application.register("selects", SelectsController)
 
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
+
+import TaskController from "./task_controller"
+application.register("task", TaskController)

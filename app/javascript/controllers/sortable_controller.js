@@ -14,6 +14,8 @@ export default class extends Controller {
         animation: 150,
         onEnd: function(evt) {
           const { newIndex, oldIndex, from, to } = evt;
+          console.log(evt)
+          console.log({ newIndex, oldIndex, from, to })
 
           if ( from === to && newIndex === oldIndex ) { return false }
 

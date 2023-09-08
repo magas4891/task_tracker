@@ -1,33 +1,34 @@
-<%= turbo_frame_tag dom_id(category), data: { controller: 'category',
+<%= turbo_frame_tag dom_id(category), data: { controller: 'category task',
                                               category_name: category.name,
                                               category_url_value: category_path(category),
                                               category_category_id_value: category.id } do %>
-  <div class="card category-card item"
-       style="min-width: 350px;">
+  <div class="card category-card item" style="width: 350px;">
     <h5 class="card-header mh-55">
       <div id='categoryName' class="d-flex align-items-center justify-content-between">
         <span data-category-target="name">
           <%= category.name %>
         </span>
-        <div class="dropdown ms-2" data-category-target="dropdown">
-          <button class="btn category-menu" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis no-drug"></i>
+        <div class="controls d-flex align-items-center no-drug">
+          <button class="btn" type='button' data-action="task#create">
+            <i class="fa-solid fa-plus"></i>
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a href="#" data-action="category#create:prevent" class="dropdown-item">Create</a>
-            <a href="#" data-action="category#showInput:prevent" class="dropdown-item">Rename</a>
-            <a href="#" data-action="category#destroy:prevent" class="dropdown-item">Delete</a>
+          <div class="dropdown ms-2" data-category-target="dropdown">
+            <button class="btn category-menu" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-ellipsis"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a href="#" data-action="category#create:prevent" class="dropdown-item">Create</a>
+              <a href="#" data-action="category#showInput:prevent" class="dropdown-item">Rename</a>
+              <a href="#" data-action="category#destroy:prevent" class="dropdown-item">Delete</a>
+            </div>
           </div>
         </div>
       </div>
     </h5>
     <div class="card-body no-drug">
-      <ul class="p-0" data-category-id="<%= category.id %>" data-sortable-target="tasks">
-        <% category.tasks.order(position: :asc).each do |t| %>
-          <li class="task-item list-unstyled" data-task-id="<%= t.id %>">
-            <i class="bi bi-arrows-move task-handle pr-3"></i>
-            <%= t.title %>
-          </li>
+      <ul class="p-0 d-flex flex-column gap-3" data-category-id="<%= category.id %>" data-sortable-target="tasks">
+        <% category.tasks.order(position: :asc).each do |task| %>
+          <%= render 'categories/task_preview', task: task, category_id: category.id %>
         <% end %>
       </ul>
     </div>
