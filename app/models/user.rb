@@ -4,5 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one :dashboard
+
   has_many :tasks
+
+  after_create -> { create_dashboard }
 end

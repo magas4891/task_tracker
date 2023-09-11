@@ -5,3 +5,27 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+user_params = {
+  email: 'test2@example.com',
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  password: 'password'
+}
+user = User.create(user_params)
+
+5.times do
+  cat = user.dashboard.categories.create(name: Faker::Hobby.activity)
+  10.times do
+    cat.tasks.create(user: user,
+                     title: Faker::Movie.title,
+                     description: Faker::ChuckNorris.fact,
+                     due_date: Faker::Date.forward)
+  end
+end
+
+20.times do
+  user.tasks.create(title: Faker::Movie.title,
+                    description: Faker::ChuckNorris.fact,
+                    due_date: Faker::Date.forward)
+end

@@ -3,6 +3,16 @@
     <!-- Logo (Link to root_path) -->
     <a class="navbar-brand" href="/">Your Logo</a>
 
+    <div class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="<%= categories_path %>">Categories</a></li>
+        <li><a class="dropdown-item" href="<%= tasks_path %>">Tasks</a></li>
+      </ul>
+    </div>
+
     <!-- Toggler Button for mobile view -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

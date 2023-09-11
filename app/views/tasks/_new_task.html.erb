@@ -1,1 +1,11 @@
-<%= link_to 'Create Task', new_task_path %>
+<div class="card">
+  <div class="card-body">
+    <%= simple_form_for task, html: { class: 'd-flex align-items-center justify-content-between' }, defaults: { wrapper: false } do |f| %>
+      <%= f.input :title, label: false, autocomplete: false, wrapper_html: { class: 'mb-0' } %>
+      <%= f.hidden_field :category_id, value: category %>
+      <button class='btn remove-task' type='button'>
+        <i class='fa-solid fa-xmark'></i>
+      </button>
+    <% end %>
+  </div>
+</div>

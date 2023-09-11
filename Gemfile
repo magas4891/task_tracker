@@ -68,3 +68,7 @@ end
 gem "devise"
 
 gem "simple_form", "~> 5.2"
+
+gem 'faker'
+
+gem "acts_as_list", "~> 1.1"

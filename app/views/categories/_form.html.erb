@@ -1,0 +1,15 @@
+<div class='card category-card item' style='min-width: 350px;'>
+  <h5 class='card-header mh-55'>
+    <div id='categoryName' class='d-flex align-items-center justify-content-between'>
+      <%= simple_form_for category, defaults: { input_html: { class: 'mt-1' } } do |f| %>
+        <%= f.input_field :name, label: false %>
+        <%= f.hidden_field :position, value: category.position %>
+      <% end %>
+      <button class='btn remove-category' type='button'>
+        <i class='fa-solid fa-xmark'></i>
+      </button>
+    </div>
+  </h5>
+  <div class='card-body no-drug'>
+  </div>
+</div>
