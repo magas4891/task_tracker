@@ -8,6 +8,13 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks
   end
 
+  def show
+    @task = Task.find(params[:id])
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.update('task-content', partial: 'categories/task_details', locals: { task: @task }) }
+    end
+  end
+
   def edit
     render :new
   end

@@ -1,8 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 import $ from 'jquery';
+import csrfToken from "../scripts/csrfToken";
 
 // Connects to data-controller="task"
 export default class extends Controller {
+  static values = { url: String }
+
   connect() {
   }
 
@@ -33,7 +36,6 @@ export default class extends Controller {
                 if (closeButton) {
                   nameInput.focus();
                   closeButton.addEventListener('click', () => {
-                    // this.removeFrame(frameContent);
                     frameContent.remove();
 
                   });
@@ -49,5 +51,27 @@ export default class extends Controller {
 
           observer.observe(document.getElementById('new_task'), { childList: true, subtree: true });
         });
+  }
+
+  show() {
+    fetch(this.url, {
+      headers: { Accept: 'text/vnd.turbo-stream.html' }
+    })
+        .then((response) => response.text())
+        .then((html) => { Turbo.renderStreamMessage(html) })
+        .catch((error) => {
+          console.error('Error fetching task details:', error);
+        });
+    $('#task-content').css('right', 0);
+  }
+
+  close() {
+    const taskContent= $('#task-content');
+    taskContent.css('right', '-100%');
+    taskContent.empty();
+  }
+
+  get url() {
+    return this.urlValue;
   }
 }
