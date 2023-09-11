@@ -5,11 +5,6 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = current_user.dashboard.categories
-
-    # render :index
-    # if turbo_frame_request?
-    #
-    # end
   end
 
   def show
