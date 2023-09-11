@@ -4,11 +4,14 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import CategoryController from "./category_controller"
+application.register("category", CategoryController)
 
 import SelectsController from "./selects_controller"
 application.register("selects", SelectsController)
 
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
+
+import TaskController from "./task_controller"
+application.register("task", TaskController)

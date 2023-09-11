@@ -6,4 +6,6 @@ class Category < ApplicationRecord
   scope :populated_category_tasks, -> { joins(:tasks).distinct }
 
   acts_as_list sequential_updates: false, scope: :dashboard
+
+  validates :name, presence: true, uniqueness: true
 end

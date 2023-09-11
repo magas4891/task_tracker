@@ -1,6 +1,11 @@
 <h1>Dashboard</h1>
 
-<div id="categories" class="d-flex gap-3" data-controller="sortable" data-sortable-target="categories">
+<div id='categories' class='d-flex gap-3 x-overflow-scrolling'>
   <%= render 'categories/uncategorized_tasks' %>
-  <%= render 'categories/categories', categories: @categories %>
+  <div id='namedCategories' class='d-flex gap-3' data-controller='sortable' data-sortable-target='categories'>
+    <% @categories.each do |category| %>
+      <%= render 'categories/category', category: category %>
+    <% end %>
+  </div>
 </div>
+<div id="task-content" data-controller="task"></div>

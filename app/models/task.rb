@@ -15,4 +15,6 @@ class Task < ApplicationRecord
   scope :uncategorized, -> { where(category_id: nil) }
 
   acts_as_list scope: [:category_id, :user_id]
+
+  after_create { self.move_to_top }
 end

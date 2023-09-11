@@ -1,12 +1,11 @@
 import { Controller } from "@hotwired/stimulus";
 import Sortable from "sortablejs";
+import csrfToken from '../scripts/csrfToken';
 
 export default class extends Controller {
   static targets = ["categories", "tasks"];
 
   connect() {
-    const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-
     this.tasksTargets.forEach((e) => {
       const taskSortable = Sortable.create(e, {
         group: 'tasks',
@@ -15,6 +14,8 @@ export default class extends Controller {
         animation: 150,
         onEnd: function(evt) {
           const { newIndex, oldIndex, from, to } = evt;
+          console.log(evt)
+          console.log({ newIndex, oldIndex, from, to })
 
           if ( from === to && newIndex === oldIndex ) { return false }
 
@@ -33,7 +34,7 @@ export default class extends Controller {
               Accept: "text/vnd.turbo-stream.html"
             },
             body: JSON.stringify(data)
-          })
+          });
         }
       });
     });
@@ -41,19 +42,17 @@ export default class extends Controller {
     this.categoriesTargets.forEach((e) => {
       const categorySortable = Sortable.create(e, {
         group: 'categories',
-        handle: '.category-handle',
+        filter: '.no-drug',
         swapThreshold: 1,
         animation: 150,
         onEnd: function(evt) {
           const { newIndex, oldIndex } = evt;
 
-          console.log({newIndex, oldIndex})
-
           if ( newIndex === oldIndex ) { return false }
 
           const data = {
-            new_position: newIndex,
-            old_position: oldIndex
+            new_position: newIndex + 1,
+            old_position: oldIndex + 1
           }
 
           fetch('/dashboards/categories_reorder', {
@@ -64,7 +63,7 @@ export default class extends Controller {
               Accept: "text/vnd.turbo-stream.html"
             },
             body: JSON.stringify(data)
-          })
+          });
         }
       });
     });

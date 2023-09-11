@@ -1,2 +1,1 @@
-<%= turbo_stream.append('tasks', partial: 'tasks/task', locals: { task: @task }) %>
-<%= turbo_stream.update('new_task', partial: 'tasks/new_task') %>
+<%= turbo_stream.replace('new_task', partial: 'categories/task_preview', locals: { task: @task }) %>

@@ -1,1 +1,3 @@
-<%= render 'tasks/form' %>
+<%= simple_form_for @task, data: { controller: 'selects' } do |f| %>
+  <%= f.input :title, input_html: { class: 'form-control' } %>
+<% end %>

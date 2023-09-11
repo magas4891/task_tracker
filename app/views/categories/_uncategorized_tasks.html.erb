@@ -1,15 +1,15 @@
-<%= turbo_frame_tag 'uncategorized'  do %>
-  <div class="card category-card item" style="min-width: 350px;">
-    <h5 class="card-header">
+<%= turbo_frame_tag 'uncategorized', data: { controller: 'task' } do %>
+  <div class="card category-card item" style="width: 350px;">
+    <h5 class="card-header mh-55 d-flex align-items-center">
       Uncategorized
+      <button class="btn" type='button' data-action="task#create">
+        <i class="fa-solid fa-plus"></i>
+      </button>
     </h5>
-    <div class="card-body">
-      <ul class="p-0" data-category-id="nil" data-sortable-target="tasks">
-        <% @tasks.each do |t| %>
-          <li class="task-item list-unstyled" data-task-id="<%= t.id %>">
-            <i class="bi bi-arrows-move task-handle pr-3"></i>
-            <%= t.title %>
-          </li>
+    <div class="card-body" data-controller="sortable" data-sortable-target="categories">
+      <ul class="p-0 d-flex flex-column gap-3" data-category-id="nil" data-sortable-target="tasks">
+        <% @tasks.each do |task| %>
+          <%= render 'categories/task_preview', task: task, category_id: nil %>
         <% end %>
       </ul>
     </div>
