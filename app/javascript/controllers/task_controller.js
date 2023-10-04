@@ -71,6 +71,49 @@ export default class extends Controller {
     taskContent.empty();
   }
 
+  edit() {
+    const editableElement = event.target;
+    editableElement.contentEditable = true;
+    editableElement.focus();
+    let timeouts = [];
+
+    $(editableElement).one('focusout', (event) => {
+      timeouts.push(setTimeout(() => this.handleSubmit(event, editableElement, this.url, timeouts), 100));
+    })
+    $(editableElement).on('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        timeouts.push(setTimeout(() => this.handleSubmit(event, editableElement, this.url, timeouts), 100));
+      }
+    });
+  }
+
+  handleSubmit(e, elem, url, timeouts) {
+    this.saveChanges(e, elem, url);
+    timeouts.forEach((timeout) => clearTimeout(timeout));
+  }
+
+  saveChanges(e, elem, url, timeouts) {
+    const newValue = elem.innerText;
+    elem.contentEditable = false;
+    $(elem).off('keydown')
+    const field = elem.classList.value.split('-')[1];
+    const data = {
+      task:{
+        [field]: newValue
+      }
+    }
+    fetch(url, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken,
+          Accept: 'text/vnd.turbo-stream.html'
+        },
+        body: JSON.stringify(data)
+    })
+  }
+
   get url() {
     return this.urlValue;
   }

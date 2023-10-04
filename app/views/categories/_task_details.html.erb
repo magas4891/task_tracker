@@ -1,7 +1,7 @@
-<div class="task-details-container h-100">
-  <h4 class="task-title"><%= task.title %></h4>
+<div class="task-details-container h-100" data-controller="task" data-task-url-value="<%= task_path(task) %>">
+  <h4 class="task-title" data-action="click->task#edit"><%= task.title %></h4>
   <button class="close-button" id="close-details" data-action="task#close">&times;</button>
-  <p class="task-description"><%= task.description %></p>
+  <p class="task-description" data-action="click->task#edit"><%= task.description %></p>
   <p class="task-meta">Due Date: <%= task.due_date %></p>
   <p class="task-meta">Status: <%= task.status %></p>
 </div>
