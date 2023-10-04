@@ -59,3 +59,39 @@
 .close-button:hover {
   color: #ff6347; /* Change color on hover */
 }
+
+.category-card > .card-body {
+  max-height: calc(100vh - 127px);
+  overflow-y: hidden;
+  scroll-padding-bottom: 24px;
+  scroll-padding-top: 24px;
+  padding-right: 20px;
+}
+
+.category-card > .card-body:hover {
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.task-item .card-body {
+  position: relative;
+}
+
+.task-item i.task-handle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.card-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  flex-grow: 1;
+  margin-right: 1rem;
+}

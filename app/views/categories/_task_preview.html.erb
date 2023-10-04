@@ -1,9 +1,12 @@
-<li class="list-unstyled task-item" data-controller="task" data-task-id="<%= task.id %>" data-action="click->task#show" data-task-url-value="<%= task_path(task) %>">
+<li class="list-unstyled task-item" data-controller="task"
+                                    data-task-id="<%= task.id %>"
+                                    data-action="click->task#show"
+                                    data-task-url-value="<%= task_path(task) %>">
   <div class="card">
     <div class="card-body">
-      <i class="bi bi-arrows-move task-handle pr-3"></i>
       <p class="card-text text-wrap">
-        <%= task.title %>
+        <span class="title"><%= task.title %></span>
+        <i class="bi bi-arrows-move task-handle pr-3 ms-1"></i>
       </p>
     </div>
   </div>
