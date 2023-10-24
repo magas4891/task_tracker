@@ -1,24 +1,10 @@
 # README
+**Project Name**: Task Tracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Project Description**: Develop a simple web application that allows users to track their tasks and manage them efficiently. Users can create, update, and delete tasks, mark tasks as completed, and organize them using categories.
 
-Things you may want to cover:
+**Requirements**:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Ruby 2.5+ and Rails 6+
+- PostgreSQL database
+- Project to be hosted on GitHub
