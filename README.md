@@ -1,7 +1,7 @@
 # README
-**Project Name**: Simple tracker of tasks
+**Project Name**: Task Tracker
 
-**Project Description**: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+**Project Description**: Develop a simple web application that allows users to track their tasks and manage them efficiently. Users can create, update, and delete tasks, mark tasks as completed, and organize them using categories.
 
 **Requirements**:
 
