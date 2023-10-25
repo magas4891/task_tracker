@@ -1,6 +1,7 @@
 # README
-**Project Name**: Simple Tracker of tasks
-**Project Description**: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+**Project Name**: Task tracker
+
+**Project Description**: 123
 
 **Requirements**:
 
