@@ -1,7 +1,7 @@
 # README
-**Project Name**: Porttitor lacus luctus accumsan tortor posuere ac ut consequat semper. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec. Senectus et netus et malesuada.
+**Project Name**: Venenatis cras sed felis eget velit.
 
-**Project Description**: Quis varius quam quisque id diam vel quam. Odio eu feugiat pretium nibh ipsum consequat nisl vel pretium. Facilisi nullam vehicula ipsum a arcu cursus vitae congue mauris. Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis. Porttitor leo a diam sollicitudin.
+**Project Description**: Elementum nisi quis eleifend quam adipiscing vitae proin sagittis. Ornare aenean euismod elementum nisi quis. Odio pellentesque diam volutpat commodo sed. Ac ut consequat semper viverra nam libero. Purus sit amet volutpat consequat. Scelerisque eu ultrices vitae auctor. Sit amet porttitor eget dolor morbi non arcu risus. Ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Non enim praesent elementum facilisis.
 
 **Requirements**:
 
