@@ -1,7 +1,7 @@
 # README
-**Project Name**: Adipiscing diam donec adipiscing tristique risus nec feugiat in fermentum.
+**Project Name**: Vestibulum lectus mauris ultrices eros in cursus turpis massa.
 
-**Project Description**: QNisi quis eleifend quam adipiscing vitae proin. Vestibulum sed arcu non odio euismod lacinia at quis. Eget nullam non nisi est. In pellentesque massa placerat duis ultricies lacus sed. Pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Arcu odio ut sem nulla.
+**Project Description**: Ultrices vitae auctor eu augue ut lectus arcu. Curabitur vitae nunc sed velit dignissim. Pretium fusce id velit ut tortor. Quis risus sed vulputate odio ut. Tincidunt id aliquet risus feugiat in ante metus dictum at. Ut placerat orci nulla pellentesque dignissim enim sit amet.
 
 **Requirements**:
 
