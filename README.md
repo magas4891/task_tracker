@@ -1,7 +1,7 @@
 # README
-**Project Name**: Consectetur adipiscing elit ut aliquam purus sit amet. Morbi tristique senectus et netus et malesuada fames.
+**Project Name**: Gravida rutrum quisque non tellus orci ac auctor. Enim praesent elementum facilisis leo vel.
 
-**Project Description**: Risus ultricies tristique nulla aliquet enim tortor at. Turpis tincidunt id aliquet risus feugiat in. Blandit massa enim nec dui nunc mattis enim ut tellus. Dolor sit amet consectetur adipiscing elit ut aliquam. Augue lacus viverra vitae congue eu consequat ac felis. Nulla malesuada pellentesque elit eget gravida cum sociis natoque penatibus.
+**Project Description**: Et malesuada fames ac turpis egestas. Amet luctus venenatis lectus magna fringilla urna porttitor. Placerat vestibulum lectus mauris ultrices. Lorem ipsum dolor sit amet consectetur adipiscing. Ornare arcu odio ut sem nulla. Nisi quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus. Ultrices tincidunt arcu non sodales neque. Posuere lorem ipsum dolor sit amet. Ullamcorper sit amet risus nullam eget felis eget nunc. Urna molestie at elementum eu facilisis sed. Viverra justo nec ultrices dui sapien. Amet cursus sit amet dictum sit. Sit amet aliquam id diam maecenas ultricies mi eget mauris.
 
 **Requirements**:
 
