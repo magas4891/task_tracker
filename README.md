@@ -5,7 +5,7 @@
 
 **Requirements**:
 
-- Ruby 2.5+ and Rails 6+
+- Ruby 3.2+ and Rails 1+
 - PostgreSQL database
 - Project to be hosted on GitHub
 
