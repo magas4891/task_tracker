@@ -1,3 +1,251 @@
+// ========== Theme variables ==========
+:root {
+  --app-bg: #e8eef3;
+  --app-bg-gradient: linear-gradient(145deg, #e8eef3 0%, #d4dce5 50%, #e2e8f0 100%);
+  --app-surface: #ffffff;
+  --app-surface-elevated: #ffffff;
+  --app-nav-bg: #1e293b;
+  --app-nav-text: #f1f5f9;
+  --app-nav-hover: #334155;
+  --app-accent: #3b82f6;
+  --app-accent-soft: #dbeafe;
+  --app-card-header: #f1f5f9;
+  --app-border: #e2e8f0;
+  --app-text: #1e293b;
+  --app-text-muted: #64748b;
+  --app-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --app-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --app-shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.1);
+  --app-radius: 10px;
+  --app-radius-sm: 6px;
+}
+
+// ========== Base & layout ==========
+body {
+  min-height: 100vh;
+  background: var(--app-bg);
+  background: var(--app-bg-gradient);
+  background-attachment: fixed;
+  color: var(--app-text);
+}
+
+.main-content {
+  padding: 1.5rem 1rem 2rem;
+  min-height: calc(100vh - 56px);
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--app-text);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+// ========== Navbar overrides ==========
+.app-navbar {
+  background: var(--app-nav-bg) !important;
+  box-shadow: var(--app-shadow-md);
+}
+
+.app-navbar .navbar-brand {
+  color: var(--app-nav-text) !important;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.app-navbar .nav-link {
+  color: rgba(241, 245, 249, 0.9) !important;
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus {
+  color: var(--app-nav-text) !important;
+  background: var(--app-nav-hover);
+  border-radius: var(--app-radius-sm);
+}
+
+.app-navbar .dropdown-menu {
+  border: none;
+  box-shadow: var(--app-shadow-lg);
+  border-radius: var(--app-radius-sm);
+  padding: 0.25rem;
+}
+
+.app-navbar .dropdown-item {
+  border-radius: var(--app-radius-sm);
+}
+
+.app-navbar .dropdown-item:hover {
+  background: var(--app-accent-soft);
+  color: var(--app-accent);
+}
+
+.app-navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--app-nav-text);
+}
+
+.app-navbar .btn-primary {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+}
+
+.app-navbar .btn-primary:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.app-navbar .btn-outline-primary {
+  border-color: var(--app-nav-text);
+  color: var(--app-nav-text);
+}
+
+.app-navbar .btn-outline-primary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--app-nav-text);
+  color: var(--app-nav-text);
+}
+
+// ========== Cards & panels ==========
+.category-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.category-card:hover {
+  box-shadow: var(--app-shadow-md);
+}
+
+.category-card > .card-header {
+  background: var(--app-card-header);
+  border-bottom: 1px solid var(--app-border);
+  font-weight: 600;
+  color: var(--app-text);
+  border-radius: var(--app-radius) var(--app-radius) 0 0;
+}
+
+.task-item .card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+  box-shadow: var(--app-shadow);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.task-item .card:hover {
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 1px var(--app-accent-soft);
+}
+
+.task-item .card-body {
+  position: relative;
+}
+
+// ========== Auth pages (Devise) ==========
+.auth-page {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow-lg);
+  border: 1px solid var(--app-border);
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+}
+
+.auth-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--app-text);
+}
+
+.auth-card .field {
+  margin-bottom: 1rem;
+}
+
+.auth-card .field label {
+  font-weight: 500;
+  color: var(--app-text);
+  margin-bottom: 0.25rem;
+}
+
+.auth-card .form-control,
+.auth-card input[type="email"],
+.auth-card input[type="password"],
+.auth-card input[type="text"] {
+  border-radius: var(--app-radius-sm);
+  border: 1px solid var(--app-border);
+  padding: 0.5rem 0.75rem;
+}
+
+.auth-card .form-control:focus,
+.auth-card input:focus {
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 3px var(--app-accent-soft);
+}
+
+.auth-card .btn-primary {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--app-radius-sm);
+  font-weight: 500;
+}
+
+.auth-card .actions {
+  margin-top: 1.25rem;
+}
+
+.auth-card .actions + [data-links],
+.auth-card .field + .actions {
+  margin-top: 1rem;
+}
+
+.auth-card a {
+  font-size: 0.9rem;
+}
+
+// ========== Categories index & simple pages ==========
+#categories .card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+#categories .card-header {
+  background: var(--app-card-header);
+  border-bottom: 1px solid var(--app-border);
+  font-weight: 600;
+}
+
+// ========== Links & buttons ==========
+a:not(.nav-link):not(.dropdown-item):not(.btn) {
+  color: var(--app-accent);
+}
+
+a:not(.nav-link):not(.dropdown-item):not(.btn):hover {
+  color: #2563eb;
+}
+
+// ========== Utilities ==========
 .mh-55 {
   min-height: 55px;
 }
@@ -7,24 +255,51 @@
   white-space: nowrap;
 }
 
-#task-content {
+.task-panel-wrapper {
   position: fixed;
   top: 0;
-  right: -100%; /* Initially off-screen to the right */
-  width: 30%; /* Adjust the width as needed */
+  right: -100%;
+  width: 30%;
+  min-width: 280px;
+  max-width: 900px;
   height: 100%;
-  background-color: white;
-  transition: right 0.3s ease; /* Add a smooth transition effect */
-  box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
-  overflow-y: auto; /* Enable scrolling if content overflows */
+  background: var(--app-surface);
+  transition: right 0.3s ease;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  display: flex;
+  z-index: 1050;
+
+  &.task-panel-wrapper--resizing {
+    transition: none;
+  }
+}
+
+.task-panel-resize-handle {
+  flex-shrink: 0;
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background 0.15s ease;
+
+  &:hover,
+  .task-panel-wrapper--resizing & {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+#task-content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  background: var(--app-surface);
 }
 
 .task-details-container {
-  background-color: #fff;
+  background: var(--app-surface);
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
 }
 
 .task-title {

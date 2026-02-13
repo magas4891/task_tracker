@@ -1,1 +1,4 @@
 <%= turbo_stream.update(@task, partial: 'tasks/task', locals: { task: @task }) %>
+<%= turbo_stream.update(dom_id(@task, :title), @task.title) %>
+<%= turbo_stream.update(dom_id(@task, :details_title), @task.title) %>
+<%= turbo_stream.update(dom_id(@task, :details_description), partial: 'categories/task_details_description', locals: { task: @task }) %>

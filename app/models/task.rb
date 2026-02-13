@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  has_rich_text :description
+
   STATUSES = {
     created: 0,
     in_progress: 1,

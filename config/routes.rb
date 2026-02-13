@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :tasks
-  resources :categories
+  resources :categories do
+    member do
+      get :edit_name  # GET /categories/:id/edit_name
+    end
+  end
   resources :dashboards, only: :show do
     collection do
       patch :categories_reorder

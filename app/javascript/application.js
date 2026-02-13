@@ -19,3 +19,5 @@ var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggl
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl) })
 
+// Trix loaded from CDN in layout; build uses --alias:trix=./trix-shim.js
+import "@rails/actiontext"

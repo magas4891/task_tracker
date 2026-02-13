@@ -3,7 +3,7 @@
     <div class="card-body">
       <h5 class="card-title"><%= task.title %></h5>
       <h6 class="card-subtitle mb-2 text-muted">Until - <%= task.due_date %></h6>
-      <p class="card-text"><%= task.description %></p>
+      <div class="card-text trix-content"><%= task.description %></div>
       <%= link_to 'Edit', edit_task_path(task) %>
       <%= button_to 'Delete', task, method: :delete %>
     </div>

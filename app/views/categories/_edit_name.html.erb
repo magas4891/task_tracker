@@ -1,0 +1,11 @@
+<%= form_with model: category, data: { turbo_stream: true } do |f| %>
+  <div class="input-group">
+    <%= f.text_field :name,
+                     class: 'form-control',
+                     autofocus: true,
+                     data: {
+                       category_target: 'nameInput',
+                       action: 'keydown->category#handleEscape blur->category#handleBlur' } %>
+<!--    <button class="btn btn-primary" type="submit">Save</button>-->
+  </div>
+<% end %>

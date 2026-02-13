@@ -1,0 +1,8 @@
+trix-toolbar .trix-button-row {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    & > .trix-button-group {
+        margin-left: 0;
+    }
+}

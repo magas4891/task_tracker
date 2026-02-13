@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_category, only: %w[show edit update destroy]
+  before_action :set_category, only: %w[show edit update destroy edit_name]
   before_action :find_prev_category, only: :create
 
   def index
@@ -12,10 +12,19 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    prev_position = Category.find(params[:prevCategoryId]).position
-    @category = current_user.dashboard.categories.new(position: prev_position + 1)
+    puts "params: #{params}"
+    position = if params[:prevCategoryId].present?
+      Category.find(params[:prevCategoryId]).position + 1
+    else
+      last = current_user.dashboard.categories.order(position: :asc).last
+      last ? last.position + 1 : 0
+    end
+    @category = current_user.dashboard.categories.new(position: position)
 
-    respond_to { | format | format.turbo_stream }
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def create
@@ -44,6 +53,14 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to categories_path, notice: 'Category was successfully destroyed.' }
+    end
+  end
+
+  def edit_name
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.update("category_name_#{@category.id}",
+                                                                      partial: 'categories/edit_name',
+                                                                      locals: { category: @category }) }
     end
   end
 
