@@ -1,13 +1,15 @@
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
-<p>
+<div class="page-header">
+  <h1><%= @category.name %></h1>
+</div>
+
+<p class="mb-3">
   <strong>Tasks:</strong>
+</p>
+<div class="mb-3">
   <%- @tasks.each do |task| %>
     <%= render 'tasks/task', task: task %>
   <% end %>
-</p>
+</div>
 
-<%= link_to 'Edit', edit_category_path(@category) %>
-<%= button_to 'Delete', @category, method: :delete %>
+<%= link_to 'Edit', edit_category_path(@category), class: "btn btn-outline-primary me-2" %>
+<%= button_to 'Delete', @category, method: :delete, class: "btn btn-outline-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>

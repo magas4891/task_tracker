@@ -1,4 +1,6 @@
-<h1>Dashboard</h1>
+<div class="page-header">
+  <h1>Dashboard</h1>
+</div>
 
 <div id='categories' class='d-flex gap-3 x-overflow-scrolling'>
   <%= render 'categories/uncategorized_tasks' %>
@@ -8,4 +10,7 @@
     <% end %>
   </div>
 </div>
-<div id="task-content" data-controller="task"></div>
+<div id="task-panel-wrapper" class="task-panel-wrapper" data-controller="resizable-panel" data-resizable-panel-min-width-value="280" data-resizable-panel-max-width-value="900">
+  <div class="task-panel-resize-handle" data-action="mousedown->resizable-panel#startResize" title="Drag to resize"></div>
+  <div id="task-content" data-controller="task"></div>
+</div>

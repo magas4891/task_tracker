@@ -10,8 +10,14 @@ application.register("category", CategoryController)
 import SelectsController from "./selects_controller"
 application.register("selects", SelectsController)
 
+import ResizablePanelController from "./resizable_panel_controller"
+application.register("resizable-panel", ResizablePanelController)
+
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
 
 import TaskController from "./task_controller"
 application.register("task", TaskController)
+
+import TrixController from "./trix_controller"
+application.register("trix", TrixController)

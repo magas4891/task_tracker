@@ -1,0 +1,13 @@
+<div data-task-target="descriptionView" class="task-description-view">
+  <div class="trix-content"><%= task.description %></div>
+  <button type="button" class="btn btn-sm btn-outline-secondary mt-2" data-action="click->task#showDescriptionForm">Edit description</button>
+</div>
+<div data-task-target="descriptionForm" class="task-description-form" style="display: none;">
+  <%= form_with model: task, url: task_path(task), data: { turbo_stream: true }, method: :patch do |f| %>
+    <%= f.rich_text_area :description, class: "form-control" %>
+    <div class="mt-2">
+      <%= f.submit "Save", class: "btn btn-sm btn-primary" %>
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-action="click->task#hideDescriptionForm">Cancel</button>
+    </div>
+  <% end %>
+</div>

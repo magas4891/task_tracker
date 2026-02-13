@@ -1,13 +1,33 @@
 import { Controller } from '@hotwired/stimulus';
 import $ from 'jquery';
-import { Popover } from 'bootstrap/dist/js/bootstrap.esm.js';
+import { Popover, Dropdown } from 'bootstrap/dist/js/bootstrap.esm.js';
 import Sortable from 'sortablejs';
 import csrfToken from '../scripts/csrfToken';
 
 // Connects to data-controller="category"
 export default class extends Controller {
-  static targets = ['name', 'input', 'nameInput', 'dropdown'];
+  static targets = ['name', 'nameInput', 'dropdown'];
   static values = { url: String, categoryId: Number };
+
+  connect() {
+    console.log(this.hasNameInputTarget)
+    this.sortable = Sortable.get(document.getElementById('namedCategories'));
+    document.addEventListener('turbo:frame-render', this.handleFrameRender.bind(this));
+  }
+
+  disconnect() {
+    document.removeEventListener('turbo:frame-render', this.handleFrameRender);
+  }
+
+  handleFrameRender(event) {
+    const renderedFrame = event.target;
+    if (renderedFrame.id === `category_name_${this.categoryIdValue}` && this.hasNameInputTarget) {
+      // Якщо frame містить input (edit mode) — фокусимо
+      this.nameInputTarget.focus();
+      // Додаємо blur listener тут, бо після рендеру
+      this.nameInputTarget.addEventListener('blur', this.handleBlur.bind(this));
+    }
+  }
 
   create() {
     const newCategoryFrame = $('<turbo_frame>', {
@@ -62,91 +82,162 @@ export default class extends Controller {
         .then((html) => { Turbo.renderStreamMessage(html) });
   }
 
+  // showInput() {
+  //   // Disabling Drag-and-Drop while editing
+  //   const sortables = Sortable.get(document.getElementById('namedCategories'));
+  //   sortables.option('disabled', true);
+  //
+  //   const nameElement = $(this.element).find('#categoryName');
+  //   const name = $(this.element).data('categoryName');
+  //
+  //   // Create the <input> element
+  //   const inputElement = $('<input>', {
+  //     type: 'text',
+  //     class: 'mt-1',
+  //     'data-category-target': 'nameInput',
+  //     value: name
+  //   });
+  //
+  //   // Create the <span> element and append the <input> element to it
+  //   const spanElement = $('<span>', {
+  //     'data-category-target': 'input',
+  //   }).append(inputElement);
+  //
+  //   // Append the <span> element to a target element (e.g., a parent container)
+  //   $(nameElement).html(spanElement);
+  //
+  //   // Move focus to END of input field
+  //   const input = $(nameElement).find('input')[0];
+  //   // const end = input.value.length;
+  //   // input.setSelectionRange(end, end);
+  //   input.focus();
+  //
+  //   inputElement.on('keydown', (event) => this.handleKeyDown(event, name, this.element));
+  //   inputElement.on('blur', () => this.restoreTitle(this.element, name));
+  // }
+
   showInput() {
+    const frame = this.element.querySelector(`#category_name_${this.categoryIdValue}`)
+    if (frame) {
+      this.originalHtml = frame.innerHTML;  // Зберігаємо оригінал
+    }
+
     // Disabling Drag-and-Drop while editing
-    const sortables = Sortable.get(document.getElementById('namedCategories'));
-    sortables.option('disabled', true);
+    if (this.sortable) {
+      this.sortable.option('disabled', true);
+    }
 
-    const nameElement = $(this.element).find('#categoryName');
-    const name = $(this.element).data('categoryName');
+    fetch(`${this.url}/edit_name`, {
+      headers: { Accept: 'text/vnd.turbo-stream.html' }
+    })
+      .then((response) => response.text())
+      .then(html => {
+        Turbo.renderStreamMessage(html);
+        const checkFocus = () => {
+          if (this.hasNameInputTarget) {
+            this.nameInputTarget.focus();
+          } else {
+            requestAnimationFrame(checkFocus);
+          }
+        };
+        requestAnimationFrame(checkFocus);
+      })
+      .catch((error) => {
+        console.error('Error fetching edit form:', error);
+      });
+  }
+  // async handleKeyDown(event, name, elem) {
+  //   if (event.key === "Enter") {
+  //     console.log('Enter key pressed');
+  //     event.preventDefault();
+  //     const input = this.nameInputTarget;
+  //     const newName = this.newName;
+  //     const data = { name: newName };
+  //
+  //     try {
+  //       const response = await fetch(this.url, {
+  //         method: 'PUT',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'X-CSRF-Token': csrfToken
+  //         },
+  //         body: JSON.stringify(data)
+  //       });
+  //
+  //       if (!response.ok) {
+  //         const errors = await response.json();
+  //         this.showPopover(input, errors.join(', '));
+  //
+  //         return;
+  //       }
+  //       const html = await response.text(); // Turbo Stream message
+  //       Turbo.renderStreamMessage(html);
+  //     } catch (error) {
+  //       console.error('Fetch error:', error);
+  //     }
+  //   } else if (event.key === 'Escape') {
+  //     this.restoreTitle(elem, name);
+  //   }
+  // }
 
-    // Create the <input> element
-    const inputElement = $('<input>', {
-      type: 'text',
-      class: 'mt-1',
-      'data-category-target': 'nameInput',
-      value: name
-    });
-
-    // Create the <span> element and append the <input> element to it
-    const spanElement = $('<span>', {
-      'data-category-target': 'input',
-    }).append(inputElement);
-
-    // Append the <span> element to a target element (e.g., a parent container)
-    $(nameElement).html(spanElement);
-
-    // Move focus to END of input field
-    const input = $(nameElement).find('input')[0];
-    // const end = input.value.length;
-    // input.setSelectionRange(end, end);
-    input.focus();
-
-    inputElement.on('keydown', (event) => this.handleKeyDown(event, name, this.element));
-    inputElement.on('blur', () => this.restoreTitle(this.element, name));
+  handleBlur(event) {
+    this.restoreAfterCancel();
+    event.target.removeEventListener('blur', this.handleBlur);
   }
 
-  async handleKeyDown(event, name, elem) {
-    if (event.key === "Enter") {
+  handleEscape(event) {
+    if (event.key === 'Escape') {
       event.preventDefault();
-      const input = this.nameInputTarget;
-      const newName = this.newName;
-      const data = { name: newName };
-
-      try {
-        const response = await fetch(this.url, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': csrfToken
-          },
-          body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-          const errors = await response.json();
-          this.showPopover(input, errors.join(', '));
-
-          return;
-        }
-        const html = await response.text(); // Turbo Stream message
-        Turbo.renderStreamMessage(html);
-      } catch (error) {
-        console.error('Fetch error:', error);
-      }
-    } else if (event.key === 'Escape') {
-      this.restoreTitle(elem, name);
+      this.restoreAfterCancel();
     }
   }
 
-  restoreTitle(elem, name) {
-    // Swapping element with original content
-    const originalSpan = `<span data-category-target='name'>${name}</span>
-      <div class='dropdown ms-2' data-category-target='dropdown'>
-        <button class='btn' type='button' id='dropdownMenuButton' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-          <i class='fa-solid fa-ellipsis no-drug'></i>
-        </button>
-        <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-          <a href='#' data-action='category#showInput:prevent' class='dropdown-item'>Rename</a>
-          <a href='#' data-action='category#destroy:prevent' class='dropdown-item'>Delete</a>
-        </div>
-      </div>`;
-    $(elem).find('#categoryName').html(originalSpan);
+  restoreAfterCancel() {
+    const frame = this.element.querySelector(`#category_name_${this.categoryIdValue}`);
+    if (frame && this.originalHtml) {
+      frame.innerHTML = this.originalHtml;
+    }
+    if (this.sortable) this.sortable.option('disabled', false);
 
-    // Enabling Drag-and-Drop
-    const sortables = Sortable.get(document.getElementById('namedCategories'));
-    sortables.option('disabled', false);
+    // Re-init Bootstrap dropdown, якщо зламався після innerHTML (Bootstrap потребує)
+    const dropdownBtn = frame.querySelector('[data-bs-toggle="dropdown"]');
+    if (dropdownBtn) {
+      const dropdownInstance = Dropdown.getInstance(dropdownBtn);
+      if (dropdownInstance) {
+        dropdownInstance.hide();  // Закриваємо
+      } else {
+        // Якщо інстанс не існує, ініціалізуємо (про всяк випадок)
+        new Dropdown(dropdownBtn);
+      }
+    }
+
+    this.originalHtml = null;
   }
+
+  // restoreTitle(elem, name) {
+  //   // Swapping element with original content
+  //   const originalSpan = `<span data-category-target='name'>${name}</span>
+  //     <div class="controls d-flex align-items-center no-drug">
+  //         <button class="btn" type='button' data-action="task#create">
+  //           <i class="fa-solid fa-plus"></i>
+  //         </button>
+  //         <div class="dropdown ms-2" data-category-target="dropdown">
+  //           <button class="btn category-menu" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  //             <i class="fa-solid fa-ellipsis"></i>
+  //           </button>
+  //           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  //             <a href="#" data-action="category#create:prevent" class="dropdown-item">Create</a>
+  //             <a href="#" data-action="category#showInput:prevent" class="dropdown-item">Rename</a>
+  //             <a href="#" data-action="category#destroy:prevent" class="dropdown-item">Delete</a>
+  //           </div>
+  //         </div>
+  //       </div>`;
+  //   $(elem).find('#categoryName').html(originalSpan);
+  //
+  //   // Enabling Drag-and-Drop
+  //   const sortables = Sortable.get(document.getElementById('namedCategories'));
+  //   sortables.option('disabled', false);
+  // }
 
   removeFrame(frame) {
     event.preventDefault();

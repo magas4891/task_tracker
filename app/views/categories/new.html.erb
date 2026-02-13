@@ -1,1 +1,3 @@
-<%= render 'categories/form' %>
+<%= turbo_frame_tag 'new_category' do %>
+  <%= render 'categories/form', category: @category %>
+<% end %>
