@@ -30,7 +30,7 @@ body {
 }
 
 .main-content {
-  padding: 1.5rem 1rem 2rem;
+  padding: 1.5rem 1rem 1rem;
   min-height: calc(100vh - 56px);
 }
 
@@ -114,6 +114,9 @@ body {
 
 // ========== Cards & panels ==========
 .category-card {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 177px);
   background: var(--app-surface);
   border: 1px solid var(--app-border);
   border-radius: var(--app-radius);
@@ -126,6 +129,7 @@ body {
 }
 
 .category-card > .card-header {
+  flex-shrink: 0;
   background: var(--app-card-header);
   border-bottom: 1px solid var(--app-border);
   font-weight: 600;
@@ -251,8 +255,11 @@ a:not(.nav-link):not(.dropdown-item):not(.btn):hover {
 }
 
 .x-overflow-scrolling {
-  overflow-x: scroll;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
+  align-items: stretch;
+  min-height: calc(100vh - 177px);
 }
 
 .task-panel-wrapper {
@@ -336,16 +343,12 @@ a:not(.nav-link):not(.dropdown-item):not(.btn):hover {
 }
 
 .category-card > .card-body {
-  max-height: calc(100vh - 127px);
-  overflow-y: hidden;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
   scroll-padding-bottom: 24px;
   scroll-padding-top: 24px;
-  padding-right: 20px;
-}
-
-.category-card > .card-body:hover {
-  overflow-y: auto;
-  padding-right: 5px;
+  padding-right: 0.5rem;
 }
 
 .task-item .card-body {

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root "dashboards#show"
 
-  devise_for :users
+  devise_for :users,
+             controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :tasks
   resources :categories do

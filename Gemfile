@@ -73,3 +73,8 @@ gem "simple_form", "~> 5.2"
 gem 'faker'
 
 gem "acts_as_list", "~> 1.1"
+
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-twitter2'
+gem 'omniauth-rails_csrf_protection'
