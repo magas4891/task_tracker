@@ -24,7 +24,10 @@
         <%= f.submit "Log in", class: "btn btn-primary" %>
       </div>
     <% end %>
-
+    <%= button_to "Sign in with X", auth_x_path,
+                  method: :get,
+                  data: { turbo: false },
+                  class: "btn btn-secondary" %>
     <%= render "devise/shared/links" %>
   </div>
 </div>

@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get  '/auth/x',          to: 'auth#login',   as: :auth_x
+  get  '/auth/x/callback', to: 'auth#callback'
+
   resources :tasks
   resources :categories do
     member do

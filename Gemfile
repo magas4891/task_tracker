@@ -73,3 +73,9 @@ gem "simple_form", "~> 5.2"
 gem 'faker'
 
 gem "acts_as_list", "~> 1.1"
+
+gem 'oauth2'
+gem 'securerandom'
+gem 'base64'
+gem 'json'
+gem 'httparty'
