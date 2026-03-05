@@ -24,7 +24,11 @@
         <%= f.submit "Log in", class: "btn btn-primary" %>
       </div>
     <% end %>
-    <%= button_to "Sign in with X", auth_x_path,
+    <%= button_to "Sign in with X", oauth_login_path('x'),
+                  method: :get,
+                  data: { turbo: false },
+                  class: "btn btn-secondary" %>
+    <%= button_to "Sign in with G", oauth_login_path('google'),
                   method: :get,
                   data: { turbo: false },
                   class: "btn btn-secondary" %>
