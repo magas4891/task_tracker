@@ -11,18 +11,18 @@ class User < ApplicationRecord
 
   after_create -> { create_dashboard }
 
-  def self.from_omniauth(auth)
+  def self.find_or_create_from_omniauth(auth)
     pp ' *** '*100, auth
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email.presence || "#{auth.uid}@#{auth.provider}.oauth"
       user.password = Devise.friendly_token[0, 20]
-      first_name, last_name = parse_omniauth_name(auth)
+      first_name, last_name = extract_omniauth_name_parts(auth)
       user.first_name = first_name
       user.last_name = last_name
     end
   end
 
-  def self.parse_omniauth_name(auth)
+  def self.extract_omniauth_name_parts(auth)
     name = auth.info&.name.to_s.strip
     if name.present?
       parts = name.split(/\s+/, 2)
