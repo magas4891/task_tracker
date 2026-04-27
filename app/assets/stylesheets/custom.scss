@@ -142,12 +142,13 @@ body {
   border: 1px solid var(--app-border);
   border-radius: var(--app-radius-sm);
   box-shadow: var(--app-shadow);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .task-item .card:hover {
   border-color: var(--app-accent);
   box-shadow: 0 0 0 1px var(--app-accent-soft);
+  transform: translateY(-1px);
 }
 
 .task-item .card-body {
@@ -211,6 +212,11 @@ body {
   padding: 0.5rem 1.25rem;
   border-radius: var(--app-radius-sm);
   font-weight: 500;
+  transition: filter 0.2s ease;
+}
+
+.auth-card .btn-primary:hover {
+  filter: brightness(0.95);
 }
 
 .auth-card .actions {
